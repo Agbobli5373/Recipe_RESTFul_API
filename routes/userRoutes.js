@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const express = require("express");
 
 const userRouter = express.Router();
@@ -32,7 +31,7 @@ userRouter.get("/profile", async (req,res) => {
 })
 
 //update user profile
-userRouter.put("/", async (req,res) => {
+userRouter.put("/:userID", async (req,res) => {
     res.status(201).json({
         status :"Success",
         message : "Update User Successfull",
@@ -41,7 +40,7 @@ userRouter.put("/", async (req,res) => {
 })
 
 //Delete user profile
-userRouter.delete("/", async (req,res) => {
+userRouter.delete("/:userID", async (req,res) => {
     res.status(201).json({
         status :"Success",
         message : "User deleted Successfull",

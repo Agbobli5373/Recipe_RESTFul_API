@@ -13,9 +13,10 @@ app.get("/", (req,res)=>{
 //User Route mount
 app.use("/api/v1/users/", userRouter)
 
-//error handler middleware
-app.use(errorhandler);
 //not find Middleware
 app.use(notFound);
+//error handler middleware
+app.use(errorhandler);
+
 
 module.exports = app;
