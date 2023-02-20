@@ -1,0 +1,12 @@
+{
+  "name": "receipe_restfull_api",
+  "version": "1.0.0",
+  "description": "Receipe API\u001b[D\u001b[D\u001b[DNODE API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Agbobli Isaac",
+  "license": "ISC"
+}
