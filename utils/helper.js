@@ -15,9 +15,10 @@ exports.verifyPassword = AsyncHandler(async (password, hashPasswod) => {
 });
 
 // Function for generating json web token
-exports.generateToken = AsyncHandler(async (id) => {
-  return jwt.sign({ id }, process.env.secretKey, { expiresIn: "48h" });
-});
+exports.generateToken = (id) =>{
+  const key = process.env.secretKey;
+  return jwt.sign({ id }, key, { expiresIn: "48h" });
+};
 
 //function to verify token
 exports.verifyToken = (token) => {
