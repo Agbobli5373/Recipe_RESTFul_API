@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerCtrl } = require("../controller/userCtrl");
+const { registerCtrl, userLogin } = require("../controller/userCtrl");
 
 const userRouter = express.Router();
 
@@ -7,13 +7,7 @@ const userRouter = express.Router();
 userRouter.post("/signup", registerCtrl);
 
 // User Login
-userRouter.post("/login", async (req, res) => {
-  res.status(200).json({
-    status: "Success",
-    message: "User Login Successfull",
-    data: "User Details",
-  });
-});
+userRouter.post("/login", userLogin );
 
 //View user profile
 userRouter.get("/profile", async (req, res) => {
@@ -25,7 +19,7 @@ userRouter.get("/profile", async (req, res) => {
 });
 
 //update user profile
-userRouter.put("/:userID", async (req, res) => {
+userRouter.put("/", async (req, res) => {
   res.status(201).json({
     status: "Success",
     message: "Update User Successfull",
@@ -34,7 +28,7 @@ userRouter.put("/:userID", async (req, res) => {
 });
 
 //Delete user profile
-userRouter.delete("/:userID", async (req, res) => {
+userRouter.delete("/", async (req, res) => {
   res.status(201).json({
     status: "Success",
     message: "User deleted Successfull",

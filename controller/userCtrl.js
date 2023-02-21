@@ -1,5 +1,5 @@
 const User = require("../model/User");
-const AsyncHandler = require("exppress-async-handler");
+const AsyncHandler = require("express-async-handler");
 const {
   hashPassword,
   verifyPassword,
@@ -18,7 +18,7 @@ exports.registerCtrl = AsyncHandler(async (req, res) => {
     const createdUser = await User.create({
       name,
       email,
-      password: hashPassword(password),
+      password: await hashPassword(password),
     });
 
     res.status(201).json({
@@ -38,14 +38,14 @@ exports.userLogin = AsyncHandler(async (req, res) => {
   if (!user) {
     throw new Error("User is not found");
   } else {
-    const isMatch = verifyPassword(password, user.password);
+    const isMatch = await verifyPassword(password, user.password);
     if (!isMatch) {
       throw new Error("Invalid crendential");
     } else {
       res.status(200).json({
         status: "Success",
         message: "Login Successfull",
-        data: generateToken(user._id),
+        data: await generateToken(user._id),
       });
     }
   }

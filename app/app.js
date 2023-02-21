@@ -6,9 +6,8 @@ const userRouter = require("../routes/userRoutes");
 
 app.use(morgan("dev"));
 
-app.get("/", (req,res)=>{
-    res.send("Hello World");
-})
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //User Route mount
 app.use("/api/v1/users/", userRouter)
