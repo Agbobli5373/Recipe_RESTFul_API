@@ -1,9 +1,13 @@
 const User = require("../model/User");
 const AsyncHandler = require("exppress-async-handler");
-const { hashPassword, verifyPassword } = require("../utils/helper");
+const {
+  hashPassword,
+  verifyPassword,
+  generateToken,
+} = require("../utils/helper");
 
 //@Desc Register controller
-//@Route /api/v1/users/register
+//@Route POST  /api/v1/users/register
 //@Access Public
 exports.registerCtrl = AsyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
@@ -14,7 +18,7 @@ exports.registerCtrl = AsyncHandler(async (req, res) => {
     const createdUser = await User.create({
       name,
       email,
-      password: await hashPassword(password),
+      password: hashPassword(password),
     });
 
     res.status(201).json({
@@ -22,5 +26,27 @@ exports.registerCtrl = AsyncHandler(async (req, res) => {
       message: "User Sign up Successfull",
       data: createdUser,
     });
+  }
+});
+
+//@Desc Log in controller
+//@Route POST /api/v1/users/login
+//Access Public
+exports.userLogin = AsyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error("User is not found");
+  } else {
+    const isMatch = verifyPassword(password, user.password);
+    if (!isMatch) {
+      throw new Error("Invalid crendential");
+    } else {
+      res.status(200).json({
+        status: "Success",
+        message: "Login Successfull",
+        data: generateToken(user._id),
+      });
+    }
   }
 });
