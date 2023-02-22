@@ -1,6 +1,13 @@
 const express = require("express");
-const { registerCtrl, userLogin,userProfile,updateProfile } = require("../controller/userCtrl");
-const {isLogin} = require("../middleware/auth");
+const {
+  registerCtrl,
+  userLogin,
+  userProfile,
+  updateProfile,
+  deleteProfile,
+} = require("../controller/userCtrl");
+
+const { isLogin } = require("../middleware/auth");
 
 const userRouter = express.Router();
 
@@ -8,21 +15,15 @@ const userRouter = express.Router();
 userRouter.post("/signup", registerCtrl);
 
 // User Login
-userRouter.post("/login", userLogin );
+userRouter.post("/login", userLogin);
 
 //View user profile
-userRouter.get("/profile",isLogin, userProfile);
+userRouter.get("/profile", isLogin, userProfile);
 
 //update user profile
 userRouter.put("/", isLogin, updateProfile);
 
 //Delete user profile
-userRouter.delete("/", async (req, res) => {
-  res.status(201).json({
-    status: "Success",
-    message: "User deleted Successfull",
-    data: "User Details",
-  });
-});
+userRouter.delete("/", isLogin, deleteProfile);
 
 module.exports = userRouter;

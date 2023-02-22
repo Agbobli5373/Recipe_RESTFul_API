@@ -93,7 +93,7 @@ exports.updateProfile = AsyncHandler(async (req, res) => {
 //@Desc Delete user profile
 //@Route DELETE /api/v1/users/profile
 //@Access Private
-exports.deleteUser = AsyncHandler( async (req ,res) =>{
+exports.deleteProfile = AsyncHandler( async (req ,res) =>{
   const deletedUser = await User.findByIdAndDelete(req.userAuth._id);
   res.status(200).json({
      status : "Success",
