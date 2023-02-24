@@ -51,3 +51,21 @@ exports.getRecipeByUser = AsyncHandler(async (res, req) => {
     data: recipes,
   });
 });
+
+//@Desc Get by ID the recipe controller
+//@Route GET /api/v1/recipes/:Id
+//@Access Private
+exports.getRecipe = AsyncHandler(async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id);
+  if (!recipe) {
+    throw new Error("Recipe not found");
+  } else {
+    res
+      .status(200)
+      .json({
+        status: "Success",
+        message: "Get recipe successfull",
+        data: recipe,
+      });
+  }
+});
