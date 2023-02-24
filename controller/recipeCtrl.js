@@ -69,3 +69,19 @@ exports.getRecipe = AsyncHandler(async (req, res) => {
       });
   }
 });
+//@Desc Delete the recipe controller
+//@Route DELETE /api/v1/recipes/:Id
+//@Access Private
+exports.deleteRecipe = AsyncHandler(async (req, res) => { 
+  const recipeUser = await Recipe.findOne({req.userAuth._id});
+  if(!recipeUser){
+    throw new Error("You can't delete this recipe");
+  }else{
+    await Recipe.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      status: "Success",
+      message: "Recipe deleted successfull",
+    });
+  }
+  
+});
