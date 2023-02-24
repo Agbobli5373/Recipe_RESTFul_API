@@ -1,5 +1,5 @@
 const express = require("express");
-const { createRecipe, getRecipeByUser, getRecipesCtrl } = require("../controller/recipeCtrl");
+const { createRecipe, getRecipeByUser, getRecipesCtrl,deleteRecipe } = require("../controller/recipeCtrl");
 const { isLogin } = require("../middleware/auth");
 
 const recipeRouter = express.Router();
@@ -10,5 +10,7 @@ recipeRouter.post("/", isLogin, createRecipe);
 recipeRouter.get("/user", isLogin, getRecipeByUser);
 //Get all Recipe route
 recipeRouter.get("/", isLogin, getRecipesCtrl);
+//Delete Recipe route
+recipeRouter.delete("/:Id", isLogin, deleteRecipe);
 
 module.exports = recipeRouter;
