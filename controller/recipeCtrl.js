@@ -28,27 +28,26 @@ exports.createRecipe = AsyncHandler(async (req, res) => {
   });
 });
 
-
 //@Desc Get all the recipe controller
 //@Route GET /api/v1/recipes/
 //@Access Private
-exports.getRecipesCtrl = AsyncHandler( async (req,res) => {
-  const recipes = await Recipe.find() ;
+exports.getRecipesCtrl = AsyncHandler(async (req, res) => {
+  const recipes = await Recipe.find();
   res.status(200).json({
-    status : "Success",
-    message : "Get All recipes successfull",
-    data : recipes
-  })
-})
+    status: "Success",
+    message: "Get All recipes successfull",
+    data: recipes,
+  });
+});
 
 //@Desc Get current user the recipe controller
 //@Route GET /api/v1/recipes/user
 //@Access Private
-exports.getRecipeByUser = AsyncHandler( async (res, req) => {
-   const recipe = await Recipe.find({createdBy : req.userAuth._id}) ;
-    res.status(200).json({  
-      status : "Success", 
-      message : "Get User recipes successfull",    
-      data : recipe   
-      })
-})
+exports.getRecipeByUser = AsyncHandler(async (res, req) => {
+  const recipes = await Recipe.find({ createdBy: req.userAuth._id });
+  res.status(200).json({
+    status: "Success",
+    message: "Get User recipes successfull",
+    data: recipes,
+  });
+});
