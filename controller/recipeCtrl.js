@@ -17,7 +17,7 @@ exports.createRecipe = AsyncHandler(async (req, res) => {
     incredients,
     createdBy: req.userAuth._id,
   });
-  
+
   const user = await User.findById(req.userAuth._id);
   await user.receipes.push(createdRecipe);
   await user.save();
@@ -27,3 +27,16 @@ exports.createRecipe = AsyncHandler(async (req, res) => {
     data: createdRecipe,
   });
 });
+
+
+//@Desc Get all the recipe controller
+//@Route GET /api/v1/recipes/
+//@Access Private
+exports.getRecipeCtrl = AsyncHandler( async (req,res) => {
+  const recipes = await Recipe.find() ;
+  res.status(200).json({
+    status : "Success",
+    message : "Get All recipes successfull",
+    data : recipes
+  })
+})
