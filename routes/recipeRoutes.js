@@ -1,5 +1,11 @@
 const express = require("express");
-const { createRecipe, getRecipeByUser, getRecipesCtrl,deleteRecipe } = require("../controller/recipeCtrl");
+const {
+  createRecipe,
+  getRecipeByUser,
+  getRecipesCtrl,
+  deleteRecipe,
+  updateRecipe,
+} = require("../controller/recipeCtrl");
 const { isLogin } = require("../middleware/auth");
 
 const recipeRouter = express.Router();
@@ -12,5 +18,7 @@ recipeRouter.get("/user", isLogin, getRecipeByUser);
 recipeRouter.get("/", isLogin, getRecipesCtrl);
 //Delete Recipe route
 recipeRouter.delete("/:Id", isLogin, deleteRecipe);
+//Update Recipe route
+recipeRouter.put("/:Id", isLogin, updateRecipe);
 
 module.exports = recipeRouter;
