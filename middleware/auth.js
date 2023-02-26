@@ -3,8 +3,7 @@ const User = require("../model/User");
 
 //function to verify token
 exports.isLogin = async(req, res, next) => {
-  const token = req?.headers?.authorization?.split(" ")[1];
-  
+  const token = req?.headers?.authorization?.split(" ")[1];  
   if (!token) {
     res.status(401).json({
       status: "Fail",
@@ -20,7 +19,7 @@ exports.isLogin = async(req, res, next) => {
     } else {
       const user = await User.findById(decoded.id);
       req.userAuth = user;
-      console.log(decoded.id);
+      //console.log(decoded.id);
       next();
     }
   }
