@@ -5,8 +5,10 @@ const app = express();
 const userRouter = require("../routes/userRoutes");
 const recipeRouter = require("../routes/recipeRoutes");
 
+//Morgan 
 app.use(morgan("dev"));
 
+//json parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

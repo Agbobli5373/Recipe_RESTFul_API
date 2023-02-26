@@ -60,7 +60,7 @@ exports.userLogin = AsyncHandler(async (req, res) => {
 exports.userProfile = AsyncHandler(async (req, res) => {
   const profile = await User.findById(req.userAuth._id).select(
     "-password -createdAt -updatedAt"
-  );
+  ).populate("recipes");
   //console.log(req.userAuth._id);
   res.status(201).json({
     status: "Success",

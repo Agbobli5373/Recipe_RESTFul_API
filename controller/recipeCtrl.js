@@ -17,7 +17,7 @@ exports.createRecipe = AsyncHandler(async (req, res) => {
     incredients,
     createdBy: req.userAuth._id,
   });
-
+ //pushing recipe to user model
   const user = await User.findById(req.userAuth._id);
   await user.receipes.push(createdRecipe);
   await user.save();
