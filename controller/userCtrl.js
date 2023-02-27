@@ -49,7 +49,7 @@ exports.userLogin = AsyncHandler(async (req, res) => {
         message: "Login Successfull",
         data: token,
       });
-      console.log(user);
+     // console.log(user);
     }
   }
 });
