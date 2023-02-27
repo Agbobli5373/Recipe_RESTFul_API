@@ -21,6 +21,7 @@ exports.createRecipe = AsyncHandler(async (req, res) => {
   const user = await User.findById(req.userAuth._id);
   await user.receipes.push(createdRecipe);
   await user.save();
+
   res.status(200).json({
     status: "Success",
     message: "Recipes created Successfull",
