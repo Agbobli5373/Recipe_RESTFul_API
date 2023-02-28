@@ -16,12 +16,14 @@ exports.verifyPassword = AsyncHandler(async (password, hashPasswod) => {
 
 // Function for generating json web token
 exports.generateToken = (id) =>{
+  //secret key
   const key = process.env.secretKey;
   return jwt.sign({ id }, key, { expiresIn: "48h" });
 };
 
 //function to verify token
 exports.verifyToken = (token) => {
+   //secret key
   const key = process.env.secretKey;
   return jwt.verify(token, key , (err, decoded) => {
     if (err) {
